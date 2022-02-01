@@ -1,0 +1,36 @@
+graph "netris-ai" {
+  "spine0" [ memory="1024" os="cumulus-vx-3.7.15" cpus="1"]
+  "spine1" [ memory="1024" os="cumulus-vx-3.7.15" cpus="1"]
+  "leaf0" [ memory="1024" os="cumulus-vx-3.7.15" cpus="1"]
+  "leaf1" [ memory="1024" os="cumulus-vx-3.7.15" cpus="1"]
+  "leaf2" [ memory="1024" os="cumulus-vx-3.7.15" cpus="1"]
+  "leaf3" [ memory="1024" os="cumulus-vx-3.7.15" cpus="1"]
+  "host-A" [ memory="1024" os="generic/ubuntu1804" cpus="1"]
+  "host-B" [ memory="1024" os="generic/ubuntu1804" cpus="1"]
+  "host-C" [ memory="1024" os="generic/ubuntu1804" cpus="1"]
+  "host-D" [ memory="1024" os="generic/ubuntu1804" cpus="1"]
+  "Internet" [ memory="1024" os="generic/ubuntu1804" cpus="1"]
+  "border0" [ memory="1024" os="generic/ubuntu1804" cpus="1"]
+  "border1" [ memory="1024" os="generic/ubuntu1804" cpus="1"]
+  "netq-ts" [ os="netq-ts-cloud-4.1.1" ]
+    "leaf0":"swp1" -- "spine0":"swp1"
+    "leaf1":"swp1" -- "spine0":"swp2"
+    "leaf0":"swp2" -- "spine1":"swp1"
+    "leaf1":"swp2" -- "spine1":"swp2"
+    "host-A":"eth1" -- "leaf0":"swp3"
+    "host-A":"eth2" -- "leaf1":"swp3"
+    "host-B":"eth2" -- "leaf1":"swp4"
+    "host-B":"eth1" -- "leaf0":"swp4"
+    "border1":"eth2" -- "Internet":"eth2"
+    "border0":"eth2" -- "Internet":"eth1"
+    "leaf2":"swp1" -- "spine0":"swp3"
+    "leaf2":"swp2" -- "spine1":"swp3"
+    "host-C":"eth1" -- "leaf2":"swp3"
+    "host-D":"eth1" -- "leaf2":"swp4"
+    "leaf2":"swp5" -- "border0":"eth1"
+    "leaf3":"swp1" -- "spine0":"swp4"
+    "leaf3":"swp2" -- "spine1":"swp4"
+    "host-C":"eth2" -- "leaf3":"swp3"
+    "host-D":"eth2" -- "leaf3":"swp4"
+    "border1":"eth1" -- "leaf3":"swp5"
+}

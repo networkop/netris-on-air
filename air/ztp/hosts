@@ -1,0 +1,21 @@
+
+
+Host border*
+    User ubuntu
+    StrictHostKeyChecking no
+
+Host internet
+    User ubuntu
+    StrictHostKeyChecking no
+
+Host host*
+    User ubuntu
+    StrictHostKeyChecking no
+
+Host netq-ts
+    User cumulus
+    StrictHostKeyChecking no
+
+Host *
+    User cumulus
+    StrictHostKeyChecking no
