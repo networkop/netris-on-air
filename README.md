@@ -64,7 +64,7 @@ Create a new V-NET by going to `Services->V-NET` and adding a new instance with 
 
 | Name | Owner | Sites | IPv4 Gateway | Ports | 
 | -----|-------|-------|--------------|-------|
-| vnet-one | Admin | Default | 10.0.1.1/24 | swp3@leaf0, swp3@leaf1, swp3@leaf2, swp3@leaf4 |
+| vnet-one | Admin | Default | 10.0.1.1/24 | swp3@leaf0, swp3@leaf1, swp3@leaf2, swp3@leaf3 |
 
 
 ![](https://gitlab.com/nvidia-networking/systems-engineering/poc-support/netris-on-air/-/raw/main/images/vnet.png)
@@ -183,7 +183,7 @@ PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 2 packets transmitted, 0 received, 100% packet loss, time 1012ms
 ```
 
-In Netris web UI, create two NAT instancse by going to `Net -> Nat` and using the following details:
+In Netris web UI, create two NAT instances by going to `Net -> Nat` and using the following details:
 
 | Name | Site | Action | Source | Destination | SNAT to IP | IP | 
 | -----|-------|-------|--------------|-------|-----------| ---- |
