@@ -190,6 +190,10 @@ In Netris web UI, create two NAT instances by going to `Net -> Nat` and using th
 | nat-1 | Default | SNAT | 10.0.0.0/8 | 1.1.1.1/32 | Yes | 198.51.100.1 |
 | nat-2 | Default | SNAT | 10.0.0.0/8 | 8.8.8.8/32 | Yes | 198.51.100.2 |
 
+Here's an example of how `nat-1` configuration should look like:
+
+![](https://gitlab.com/nvidia-networking/systems-engineering/poc-support/netris-on-air/-/raw/main/images/nat-1.png)
+
 To validate that NAT now works as expected connect to the [ifconfig.me](https://ifconfig.me/) service running on the Internet router and confirm that the source IP gets changed according our configuration:
 
 ```
