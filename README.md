@@ -69,8 +69,9 @@ Create a new V-NET by going to `Services->V-NET` and adding a new instance with 
 
 ![](https://gitlab.com/nvidia-networking/systems-engineering/poc-support/netris-on-air/-/raw/main/images/vnet.png)
 
+In the background, Netris translates this high-level V-Net data model to the low-level device configuration and installs it on all required switches in the EVPN fabric. For example, you can see the difference by looking at `/etc/frr/frr.conf` on `leaf0` [before](https://gitlab.com/nvidia-networking/systems-engineering/poc-support/netris-on-air/-/blob/main/images/leaf0-before.txt) and [after](https://gitlab.com/nvidia-networking/systems-engineering/poc-support/netris-on-air/-/blob/main/images/leaf0-after.txt) you've done this change.
 
-Once created, connect to `host-a` and verify connectivity within the new V-Net:
+A few seconds later, once all device configs have been applied, you can connect to `host-a` and verify connectivity within the new V-Net:
 
 ```
 ubuntu@host-A:~$ ping -c 2 10.0.1.1

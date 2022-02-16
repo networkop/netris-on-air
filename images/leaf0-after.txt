@@ -1,0 +1,86 @@
+hostname leaf0
+username cumulus nopassword
+!
+service integrated-vtysh-config
+!
+log syslog informational
+!
+vrf Vrf_netris
+ ip route 10.0.1.0/24 blackhole 254
+ ip route 10.0.2.0/24 blackhole 254
+ ip route 192.0.2.0/24 blackhole 254
+ ip route 192.168.200.0/24 blackhole 254
+ ip route 198.51.100.0/25 blackhole 254
+ ip route 198.51.100.128/25 blackhole 254
+ vni 16000001
+ exit-vrf
+!
+router-id 192.0.2.4
+!
+router bgp 4200000000
+ bgp router-id 192.0.2.4
+ coalesce-time 1000
+ bgp graceful-restart
+ bgp bestpath as-path multipath-relax
+ neighbor swp1 interface remote-as 4200000099
+ neighbor swp1 timers 1 3
+ neighbor swp2 interface remote-as 4200000098
+ neighbor swp2 timers 1 3
+ !
+ address-family ipv4 unicast
+  redistribute connected route-map redistribute
+  neighbor swp1 allowas-in
+  neighbor swp2 allowas-in
+ exit-address-family
+ !
+ address-family l2vpn evpn
+  neighbor swp1 activate
+  neighbor swp1 allowas-in
+  neighbor swp2 activate
+  neighbor swp2 allowas-in
+  advertise-all-vni
+ exit-address-family
+!
+router bgp 4200000000 vrf Vrf_netris
+ bgp router-id 192.0.2.4
+ coalesce-time 1000
+ !
+ address-family ipv4 unicast
+  network 10.0.1.0/24
+  network 10.0.2.0/24
+  network 192.0.2.0/24
+  network 192.168.200.0/24
+  network 198.51.100.0/25
+  network 198.51.100.128/25
+  redistribute connected route-map redistribute
+  redistribute static
+ exit-address-family
+ !
+ address-family ipv6 unicast
+  redistribute static
+ exit-address-family
+ !
+ address-family l2vpn evpn
+  advertise ipv4 unicast
+  advertise ipv6 unicast
+ exit-address-family
+!
+ip prefix-list loopback-subnet-out seq 5 permit 192.0.2.0/24 le 32
+ip prefix-list roh-aggregate-out seq 5 permit 0.0.0.0/0
+ip prefix-list roh-aggregate-out seq 10 permit 192.0.2.4/32
+ip prefix-list roh-aggregate-out seq 15 permit 192.0.2.0/24
+ip prefix-list roh-aggregate-out seq 20 permit 198.51.100.128/25
+ip prefix-list roh-aggregate-out seq 25 permit 198.51.100.0/25
+ip prefix-list roh-aggregate-out seq 30 permit 192.168.200.0/24
+ip prefix-list roh-aggregate-out seq 35 permit 10.0.2.0/24
+ip prefix-list roh-aggregate-out seq 40 permit 10.0.1.0/24
+ip prefix-list roh-default-out seq 5 permit 0.0.0.0/0
+ip prefix-list roh-default-out seq 10 permit 192.0.2.4/32
+ip prefix-list roh-full-out seq 5 permit 0.0.0.0/0 le 32
+ip prefix-list vrf-default-in seq 5 permit 0.0.0.0/0
+!
+route-map redistribute permit 10
+ match ip address prefix-list loopback-subnet-out
+!
+line vty
+!
