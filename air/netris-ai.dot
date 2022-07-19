@@ -12,7 +12,7 @@ graph "netris-ai" {
   "Internet" [ memory="1024" os="generic/ubuntu1804" cpus="1"]
   "border0" [ memory="1024" os="generic/ubuntu1804" cpus="1"]
   "border1" [ memory="1024" os="generic/ubuntu1804" cpus="1"]
-  "netq-ts" [ os="netq-ts-cloud-4.1.1" ]
+  "netris" [ memory="1024" os="generic/ubuntu2004" cpus="1"]
     "leaf0":"swp1" -- "spine0":"swp1"
     "leaf1":"swp1" -- "spine0":"swp2"
     "leaf0":"swp2" -- "spine1":"swp1"

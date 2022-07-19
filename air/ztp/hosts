@@ -12,8 +12,8 @@ Host host*
     User ubuntu
     StrictHostKeyChecking no
 
-Host netq-ts
-    User cumulus
+Host netris
+    User ubuntu
     StrictHostKeyChecking no
 
 Host *
